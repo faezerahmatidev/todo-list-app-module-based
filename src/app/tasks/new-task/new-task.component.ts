@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { type NewTask } from '../task/task.model';
+
 @Component({
   selector: 'app-new-task',
   standalone: true,
@@ -9,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class NewTaskComponent {
   @Output() cancel = new EventEmitter<boolean>();
+  @Output() add = new EventEmitter<NewTask>();
 
   enteredTitle: string = '';
   enteredSummary: string = '';
@@ -17,5 +20,11 @@ export class NewTaskComponent {
     this.cancel.emit(false);
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.add.emit({
+      title: this.enteredTitle,
+      summary: this.enteredSummary,
+      date: this.enteredDate,
+    });
+  }
 }
