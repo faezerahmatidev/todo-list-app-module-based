@@ -13,4 +13,8 @@ export class TasksComponent {
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) userName!: string;
   tasks = DUMMY_TASKS;
+
+  get selectedUserTasks() {
+    return this.tasks.filter((task) => task.userId === this.userId);
+  }
 }
